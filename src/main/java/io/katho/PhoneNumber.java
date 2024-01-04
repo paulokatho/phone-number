@@ -1,7 +1,6 @@
 package io.katho;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ComparisonChain;
 
 import java.util.*;
 
