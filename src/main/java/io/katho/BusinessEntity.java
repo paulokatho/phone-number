@@ -1,4 +1,4 @@
-package com.redhat.developers;
+package io.katho;
 
 import java.io.IOException;
 import java.io.InvalidObjectException;
