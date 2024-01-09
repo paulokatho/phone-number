@@ -9,25 +9,32 @@ import java.util.function.UnaryOperator;
 
 public class MethodReferences {
 
+    static Function<Integer, Integer> f1 = MethodReferences::addOne;
+    static Function<Integer, Integer> f2 = f -> f + 2;
+
     public static void main (String[] args) {
-        
-        //- Tipos de Static Method References
-        
-        //- Esse é o Method References mais simples de todos        
-        st(s -> Integer.parseInt(s));//Lambda        
-        st(Integer::parseInt);//Method References
-
-        //Esse é o mais complexo de todos : Porque não quer chamar ele em qualquer objeto, mas sim chamar o metodo isAfter() no objeto específico que vai ser retornado pelo metodo .now()
-        //Só se sabe quel é o objeto que ele precisa em tempo de execução - Por isso ele é o mais complicado de todos
-        bound(instant -> Instant.now().isAfter(instant));//Lambda
-        bound(Instant.now()::isAfter); //Method References
-        //O Instant.now() esta recebendo um novo objeto do tipo Instant
-        //Então no metodo que esta sendo retornado no metodo .now() nós vamos chamar o metodo isAfter(instant), passando como parametro o instant
-
-        unbound(null);
-    
+       
+        System.out.println(f1.andThen(f2).apply(5));
+        st(Integer::parseInt);
+        bound(instant -> getNOW().isAfter(instant));
+        bound(getNOW()::isAfter);
+        bound(instant -> Instant.now().isAfter(instant));
+        bound(Instant.now()::isAfter);
+        unbound(String::toLowerCase);
+        constructor (TreeMap::new);
+        array(int[]::new);
     }
 
+    public static Integer addOne(Integer integer) {
+        return integer + 1;
+    }
+
+    private static final Instant NOW = Instant.now();
+
+    public static Instant getNOW() {
+        return NOW;
+    }
+    
 
     public static void st(Function<String, Integer> function) {
 
@@ -41,11 +48,11 @@ public class MethodReferences {
 
     }
 
-    public static void construtor(Supplier<TreeMap<String, String>> supplier) {
+    public static void constructor(Supplier<TreeMap<String, String>> supplier) {
 
     }
 
-     public static void array(Function<Integer, int[]> function) {
+    public static void array(Function<Integer, int[]> function) {
         
      }
 
