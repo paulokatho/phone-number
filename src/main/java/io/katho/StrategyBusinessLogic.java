@@ -3,6 +3,7 @@ package io.katho;
 import java.util.Objects;
 import java.util.function.IntUnaryOperator;
 
+
 public class StrategyBusinessLogic {
     
 private final IntUnaryOperator operator;
